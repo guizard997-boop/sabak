@@ -1,0 +1,36 @@
+{
+  "url": "http://127.0.0.1:8080/",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "Сабак",
+      "hasCanvas": false,
+      "bodyTextLen": 978,
+      "bodyTextHash": "cc890e571d25e41b413ce26f0da890389c0f4798c6ca5687c92d216e48aec995",
+      "bodyTextPrefix": "9 КЛАСС · КЫРГЫЗСТАН Сабак Полка учебников с живым перелистывани",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-preview.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "Сабак",
+      "hasCanvas": false,
+      "bodyTextLen": 978,
+      "bodyTextHash": "cc890e571d25e41b413ce26f0da890389c0f4798c6ca5687c92d216e48aec995",
+      "bodyTextPrefix": "9 КЛАСС · КЫРГЫЗСТАН Сабак Полка учебников с живым перелистывани",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-preview-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/app-builder-preview.json"
+}

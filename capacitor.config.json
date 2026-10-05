@@ -1,0 +1,8 @@
+{
+  "appId": "kg.sabak.app",
+  "appName": "Сабак",
+  "webDir": "dist/client",
+  "server": {
+    "androidScheme": "https"
+  }
+}
