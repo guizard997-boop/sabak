@@ -1,0 +1,7 @@
+node_modules
+dist
+.output
+.vercel
+android/build
+android/app/build
+android/.gradle
