@@ -148,7 +148,7 @@ function authPopupPlugin(): Plugin {
 // `vite build --mode capacitor` (npm run build:mobile) собирает статичный SPA-бандл для
 // Android-обёртки Capacitor: без Nitro/Vercel-сервера, всё в dist/client (webDir).
 export default defineConfig(({ command, isPreview, mode }) => {
-  const mobile = mode === "capacitor";
+  const mobile = mode === "capacitor" || process.argv.includes("capacitor");
   return {
   server: {
     host: "0.0.0.0",
