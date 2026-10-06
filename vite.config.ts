@@ -148,45 +148,47 @@ function authPopupPlugin(): Plugin {
 // `vite build --mode capacitor` (npm run build:mobile) собирает статичный SPA-бандл для
 // Android-обёртки Capacitor: без Nitro/Vercel-сервера, всё в dist/client (webDir).
 export default defineConfig(({ command, isPreview, mode }) => {
+  // Внутренний превью-сервер TanStack (prerender) стартует в режиме "production",
+  // поэтому режим capacitor определяем ещё и по аргументам командной строки.
   const mobile = mode === "capacitor" || process.argv.includes("capacitor");
   return {
-  server: {
-    host: "0.0.0.0",
-    port: 8080,
-    strictPort: true,
-  },
-  preview: {
-    host: "127.0.0.1",
-    port: 8081,
-    strictPort: true,
-  },
-  resolve: { tsconfigPaths: true },
-  plugins: [
-    pgliteBootstrapPlugin(),
-    // Before tanstackStart so /auth/popup never falls through to the SPA.
-    authPopupPlugin(),
-    // Dev-only /__app-env, read by scripts/check-auth-invariant.mjs.
-    appEnvPlugin(),
-    // PWA head + ?install=1 tutorial page; runs before Start/Nitro.
-    grokPwaPlugin(),
-    tailwindcss(),
-    tanstackStart(
-      mobile
-        ? { spa: { enabled: true, prerender: { outputPath: "/index.html", crawlLinks: false } } }
-        : undefined,
-    ),
-    ...(!mobile && (command === "build" || isPreview)
-      ? [
-          nitro({
-            preset: "vercel",
-            // Auto-registers server/middleware/* (the PWA install page +
-            // manifest + head-tag middleware). Nitro v3 defaults serverDir to
-            // false, so removing this silently unwires /?install=1 on deploys.
-            serverDir: "./server",
-          }),
-        ]
-      : []),
-    viteReact(),
-  ],
-};
+    server: {
+      host: "0.0.0.0",
+      port: 8080,
+      strictPort: true,
+    },
+    preview: {
+      host: "127.0.0.1",
+      port: 8081,
+      strictPort: true,
+    },
+    resolve: { tsconfigPaths: true },
+    plugins: [
+      pgliteBootstrapPlugin(),
+      // Before tanstackStart so /auth/popup never falls through to the SPA.
+      authPopupPlugin(),
+      // Dev-only /__app-env, read by scripts/check-auth-invariant.mjs.
+      appEnvPlugin(),
+      // PWA head + ?install=1 tutorial page; runs before Start/Nitro.
+      grokPwaPlugin(),
+      tailwindcss(),
+      tanstackStart(
+        mobile
+          ? { spa: { enabled: true, prerender: { outputPath: "/index.html", crawlLinks: false } } }
+          : undefined,
+      ),
+      ...(!mobile && (command === "build" || isPreview)
+        ? [
+            nitro({
+              preset: "vercel",
+              // Auto-registers server/middleware/* (the PWA install page +
+              // manifest + head-tag middleware). Nitro v3 defaults serverDir to
+              // false, so removing this silently unwires /?install=1 on deploys.
+              serverDir: "./server",
+            }),
+          ]
+        : []),
+      viteReact(),
+    ],
+  };
 });
